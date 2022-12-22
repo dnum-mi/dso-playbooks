@@ -1,0 +1,13 @@
+  - name: get request input
+    uri: 
+      url: "{{ manageiq_api_url }}/api/{{ manageiq.request }}"
+      validate_certs: false
+      force_basic_auth: true
+      body_format: json
+      headers:
+        X-Auth-Token: "{{ GITLAB_TOKEN }}"
+    register: output_request
+  
+  - name: manageiq_request_dialog
+    set_fact:
+      manageiq_request_dialog: "{{ output_request.json.options.dialog }}"

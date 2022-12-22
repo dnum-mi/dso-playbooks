@@ -1,0 +1,23 @@
+- name: "{{ now().isoformat() }} - set service url"
+  set_fact:
+    auth_url: "{{ manageiq_api_url }}/api/auth"
+
+- name: "{{ now().isoformat() }} - Request admin token"
+  uri:
+    url: "{{ auth_url }}"
+    method: GET
+    validate_certs: False
+    force_basic_auth: true
+    user: "admin"
+    password: "D3vS3c0ps!!2022"
+    headers:
+      Accept: "application/json"
+    status_code: 200  
+  register: token_result
+
+- name: "{{ now().isoformat() }} - get token"
+  set_fact:
+    api_token: "{{ token_result.json.auth_token }}"
+
+- debug:
+    msg: "{{ GITLAB_TOKEN }}"

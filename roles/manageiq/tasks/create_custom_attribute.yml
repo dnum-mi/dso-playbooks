@@ -1,0 +1,15 @@
+  - name: "{{ now().isoformat() }} - custom attributes"
+    uri: 
+      url: "{{ manageiq_api_url }}/api/{{ manageiq.service }}/custom_attributes"
+      validate_certs: false
+      force_basic_auth: true
+      method: POST
+      body:
+        action: add
+        resource: 
+          name: "{{ custom_attribute_name }}"
+          value: "{{ custom_attribute_value }}"
+      body_format: json
+      headers:
+        X-Auth-Token: "{{ GITLAB_TOKEN }}"
+    register: output

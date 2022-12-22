@@ -1,0 +1,7 @@
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Copy inventory vars
+      ansible.builtin.copy:
+        dest: "{{ lookup('ansible.builtin.env', 'PLAYBOOK_DIR', default='nobody') }}/inventory/group_vars/local"
+        content: "{{ lookup('kubernetes.core.k8s', kind='Secret', namespace='openshift-operators', resource_name='ansible-inventory') | json_query('data.inventory') | b64decode }}"

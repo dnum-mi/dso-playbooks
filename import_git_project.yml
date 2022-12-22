@@ -1,0 +1,34 @@
+- name: Provisionning DSO
+  hosts: localhost
+  tasks:
+    # - debug:
+    #     msg: "{{ manageiq }}"
+    # - set_fact:
+    #     manageiq_api_url: "{{ manageiq.api_url }}"
+    # #First tasks are important when launched by manageiq to get miq data
+    # - import_role:
+    #     name: manageiq
+    #     tasks_from: get_admin_token.yml
+    # - import_role:
+    #     name: manageiq
+    #     tasks_from: get_request_input.yml
+    # - name: debug
+    #   debug:
+    #     msg: "{{ manageiq_request_dialog }}"
+    # - name: set variables to be used by playbooks from MIQ dialog
+    #   set_fact:
+    #     ORGANIZATION_NAME: "{{ manageiq_request_dialog.dialog_ORGANIZATION_NAME }}"
+    #     PROJECT_NAME: "{{ manageiq_request_dialog.dialog_PROJECT_NAME }}"
+    #     GIT_INPUT_USER: "{{ manageiq_request_dialog.dialog_GIT_INPUT_USER }}"
+    #     REPO_SRC: "{{ manageiq_request_dialog.dialog_REPO_SOURCE }}"
+    #     REPO_DEST: "{{ manageiq_request_dialog.dialog_REPO_DEST_NAME }}"
+    #     #GIT_INPUT_PASSWORD: "{{ manageiq_request_dialog.dialog_GIT_INPUT_PASSWORD }}"
+
+    - name: Import du projet Git
+      include_role:
+        name: gitlab-checkout-project
+      loop:
+        - REPO_SRC: "{{ REPO_SRC }}"
+          REPO_DEST: "{{ REPO_DEST }}"
+      loop_control:
+        loop_var: REPOSITORY

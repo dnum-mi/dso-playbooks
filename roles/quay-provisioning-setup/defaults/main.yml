@@ -1,0 +1,13 @@
+---
+# defaults file for quay-provisioning-setup
+REPO_NAME: [prj1, prj2]
+REPOSITORY_VISIBILITY: private
+ORGANIZATION_NAME: grp-test
+PROJECT_NAME: grp-test
+FINAL_NAME: "{{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}"
+QUAY_ROBOT_USERNAME: "{{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}-robot"
+QUAY_ROBOT_ROLE: "admin"
+
+# Vault
+# TODO
+
