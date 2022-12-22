@@ -1,0 +1,4 @@
+K8S_AUTH_KUBECONFIG_PATH: /config/.kubeconfig
+K8S_AUTH_KUBECONFIG: "{{ lookup('file', K8S_AUTH_KUBECONFIG_PATH) }}"
+VAULT_PROJECT_PATH: forge-dso/data/forge-mi/projects
+VAULT_PATH: "{{VAULT_PROJECT_PATH}}/{{ORGANIZATION_NAME}}/{{PROJECT_NAME}}"
