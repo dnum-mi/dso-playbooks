@@ -94,7 +94,7 @@
     name: argo-provisioning-project
   vars:
     ADDITIONAL_ARGO:
-      - REPOSITORY.REPO_DEST
+      - "{{ REPOSITORY.REPO_DEST }}"
   when: IS_INFRA is defined
 
 - name: "Migration repo"
