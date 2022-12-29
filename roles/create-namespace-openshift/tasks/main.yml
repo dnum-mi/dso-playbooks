@@ -1,8 +1,3 @@
-- name: Creating kubeconfig
-  copy:
-    dest: "~/.kube/config"
-    content: "{{lookup('vars','K8S_AUTH_KUBECONFIG')}}"
-
 - name: Create a k8s namespace
   kubernetes.core.k8s:
     name: "{{ NAMESPACE_NAME }}-{{ item }}"

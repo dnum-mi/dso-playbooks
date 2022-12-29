@@ -28,7 +28,6 @@ Le fichier README du projet infra-socle-openshift décrit comment récupérer l'
  * NEXUS_ADMIN_PASSWORD : Récupéré lors de la première connexion à Nexus suite à la modification du mot de passe par defaut
  * QUAY_ADMIN_TOKEN : Créé dans l'application Web QUAY (en tant que superuser)
  * SONAR_API_TOKEN : Créé dans l'application Web SONAR
- * K8S_AUTH_KUBECONFIG : Chemin de votre fichier kubeconfig sur votre environnement
  * Les URL sont créées / configurées lors de l'installation initiale par le fichier d'environnement env-<NOM_ENV>.sh
  * Les nom d'utilisateur ne doivent pas être modifiés
 
