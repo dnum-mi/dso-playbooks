@@ -5,7 +5,6 @@
       include_role:
         name: gitlab-delete-project
       loop:
-        - REPO_SRC: "{{ REPO_SRC }}"
-          REPO_DEST: "{{ REPO_DEST }}"
+        - REPO_DEST: "{{ REPO_DEST }}"
       loop_control:
         loop_var: REPOSITORY

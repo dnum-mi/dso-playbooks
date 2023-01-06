@@ -1,4 +1,4 @@
-- name: "Deletete GitLab Project in the group"
+- name: "Delete GitLab Project in the group"
   community.general.gitlab_project:
     api_url: "{{ GITLAB_URL }}"
     api_token: "{{ GITLAB_TOKEN }}"
@@ -14,6 +14,16 @@
     group: "forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}"
     state: absent
   register: mirror_project
+
+- name: "Delete GitLab Project Argo in the group"
+  community.general.gitlab_project:
+    api_url: "{{ GITLAB_URL }}"
+    api_token: "{{ GITLAB_TOKEN }}"
+    name: "{{ REPOSITORY.REPO_DEST }}-argo"
+    group: "forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}"
+    state: absent
+  register: argo_project
+  when: IS_INFRA is defined and IS_INFRA
 
 - name: "Delete argo"
   ansible.builtin.import_role:

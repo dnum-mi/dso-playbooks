@@ -1,4 +1,4 @@
-- name: Create a k8s namespace
+- name: Delete k8s namespace
   kubernetes.core.k8s:
     name: "{{ NAMESPACE_NAME }}-{{ item }}"
     api_version: v1
