@@ -8,6 +8,8 @@
     status_code: 200
   register: user_search
 
+- debug: var=user_search
+
 - name: Search RO group in KC
   uri:
     url: "{{ KC_API_URI }}/auth/admin/realms/{{KC_REALM}}/groups?first=0&max=20&search={{ FINAL_NAME }}-{{ item }}-RO"
