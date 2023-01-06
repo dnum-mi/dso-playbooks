@@ -8,7 +8,6 @@
     status_code: 200
   register: user_search
 
-- debug: var=user_search
 
 - name: Search RO group in KC
   uri:
@@ -30,11 +29,16 @@
     status_code: 200
   register: rw_group_search
 
+- debug: var=user_search
+- debug: var=ro_group_search
+- debug: var=rw_group_search
+
 - name: "Set id"
   set_fact:
     USER_ID: "{{ user_search.json[0].id }}"
     RO_GROUP_ID: "{{ ro_group_search.json[0].id }}"
     RW_GROUP_ID: "{{ rw_group_search.json[0].id }}"
+  failed_when: false
 
 - name: Remove User to ro group
   uri:
@@ -49,6 +53,7 @@
       groupId: "{{ RO_GROUP_ID }}"
       realm: "{{ KC_REALM }}"
       userId: "{{ USER_ID }}"
+  when: RO_GROUP_ID
 
 - name: Remove User to rw group
   uri:
@@ -63,3 +68,4 @@
       groupId: "{{ RW_GROUP_ID }}"
       realm: "{{ KC_REALM }}"
       userId: "{{ USER_ID }}"
+  when: RW_GROUP_ID
