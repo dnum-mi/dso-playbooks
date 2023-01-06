@@ -1,8 +1,10 @@
-- name: "Delete GitLab Group"
-      community.general.gitlab_group:
-        api_url: "{{ GITLAB_URL }}"
-        api_token: "{{ GITLAB_TOKEN }}"
-        validate_certs: false
-        name: "{{ GROUP_NAME }}"
-        #parent: "{{ PARENT_GROUP }}"
-        state: absent
+- name: "Delete GitLab Group organisation"
+  community.general.gitlab_group:
+    api_url: "{{ GITLAB_URL }}"
+    api_token: "{{ GITLAB_TOKEN }}"
+    validate_certs: false
+    name: "{{ ORGANIZATION_NAME }}"
+    parent: "forge-mi/projects"
+    subgroup_creation_level: "owner"
+    project_creation_level: "developer"
+    state: absent

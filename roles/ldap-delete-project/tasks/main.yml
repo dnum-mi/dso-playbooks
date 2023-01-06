@@ -1,0 +1,20 @@
+---
+# tasks file for ldap-provisioning-project
+
+- name: Delete org group read
+  ldap_entry:
+    state: absent
+    dn: "cn={{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }},ou=users,dc=example,dc=org"
+    objectClass: groupOfNames
+    attributes:
+      member: "cn={{ EMAIL }},ou=users,dc=example,dc=org"  
+  args: "{{ LDAP_AUTH }}"
+
+- name: Delete org group adm
+  ldap_entry:
+    state: absent
+    dn: "cn={{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}-adm,ou=users,dc=example,dc=org"
+    objectClass: groupOfNames
+    attributes:
+      member: "cn={{ EMAIL }},ou=users,dc=example,dc=org"  
+  args: "{{ LDAP_AUTH }}"
