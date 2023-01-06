@@ -1,0 +1,33 @@
+- name: "Create GitLab Project in the group"
+  community.general.gitlab_project:
+    api_url: "{{ GITLAB_URL }}"
+    api_token: "{{ GITLAB_TOKEN }}"
+    name: "{{ REPOSITORY.REPO_DEST }}"
+    group: "forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}"
+    state: absent
+
+- name: "Create GitLab Project Mirror in the group"
+  community.general.gitlab_project:
+    api_url: "{{ GITLAB_URL }}"
+    api_token: "{{ GITLAB_TOKEN }}"
+    name: "{{ REPOSITORY.REPO_DEST }}-mirror"
+    group: "forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}"
+    state: absent
+  register: mirror_project
+
+- name: "Create argo"
+  ansible.builtin.import_role:
+    name: argo-provisioning-project
+  vars:
+    ADDITIONAL_ARGO:
+      - "{{ REPOSITORY.REPO_DEST }}"
+  when: IS_INFRA is defined and IS_INFRA
+
+- name: Vault Repo informations
+  community.hashi_vault.vault_write:
+    url: "{{ VAULT_URL }}"
+    path: "{{ VAULT_PATH }}/{{ REPOSITORY.REPO_DEST }}-mirror"
+    data:
+      data: {}
+    auth_method: token
+    token: "{{ VAULT_TOKEN }}"
