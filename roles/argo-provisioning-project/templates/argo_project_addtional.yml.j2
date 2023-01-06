@@ -7,7 +7,7 @@ metadata:
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
-  url: "{{ GITLAB_URL }}/forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}/{{ PROJECT_NAME }}-{{ item[1] }}.git"
+  url: "{{ GITLAB_URL }}/forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}/{{ item[1] }}"
   name: private-repo
   type: git
   password: "{{ GITLAB_TOKEN }}"
