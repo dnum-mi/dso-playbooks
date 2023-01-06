@@ -1,7 +1,7 @@
 ---
 # tasks file for keycloak-provisioning-project
 
-- name: Create a project admin group
+- name: Delete a project admin group
   community.general.keycloak_group:
     name: "{{ FINAL_NAME }}-{{ item }}-RW"
     realm: "{{KC_REALM}}"
@@ -13,7 +13,7 @@
     auth_password: "{{ KC_PASSWORD }}"
   with_items: "{{ ENV_LIST }}"
 
-- name: Create a project read group
+- name: Delete a project read group
   community.general.keycloak_group:
     name: "{{ FINAL_NAME }}-{{ item }}-RO"
     realm: "{{KC_REALM}}"

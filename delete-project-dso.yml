@@ -9,12 +9,11 @@
       loop:
         - ldap-delete-project
         # - sonar-provisioning-user TODO
-        - keycloak-delete-project
         - keycloak-remove-group-user
-        - quay-provisioning-setup
+        - keycloak-delete-project
+        - quay-delete-setup
         - gitlab-delete-group
         - gitlab-remove-group-user # à vérifier
         - delete-namespace-openshift
-        - create-user-openshift
         - argo-delete-project
         # - nexus-provision-project TODO

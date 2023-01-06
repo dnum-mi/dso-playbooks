@@ -8,7 +8,6 @@
     status_code: 200
   register: user_search
 
-
 - name: Search RO group in KC
   uri:
     url: "{{ KC_API_URI }}/auth/admin/realms/{{KC_REALM}}/groups?first=0&max=20&search={{ FINAL_NAME }}-{{ item }}-RO"
@@ -29,20 +28,13 @@
     status_code: 200
   register: rw_group_search
 
-- debug: var=user_search
-- debug: var=ro_group_search
-- debug: var=rw_group_search
-
 - name: "Set id"
   set_fact:
     USER_ID: "{{ user_search.json[0].id }}"
-    RO_GROUP_ID: "{{ ro_group_search.json[0].id }}"
-    RW_GROUP_ID: "{{ rw_group_search.json[0].id }}"
-  failed_when: false
 
 - name: Remove User to ro group
   uri:
-    url: "{{ KC_API_URI }}/auth/admin/realms/{{ KC_REALM }}/users/{{ USER_ID }}/groups/{{ RO_GROUP_ID }}"
+    url: "{{ KC_API_URI }}/auth/admin/realms/{{ KC_REALM }}/users/{{ USER_ID }}/groups/{{ ro_group_search.json[0].id }}"
     method: DELETE
     headers:
       Content-Type: application/json
@@ -50,14 +42,14 @@
     body_format: json
     status_code: 204
     body:
-      groupId: "{{ RO_GROUP_ID }}"
+      groupId: "{{ ro_group_search.json[0].id }}"
       realm: "{{ KC_REALM }}"
       userId: "{{ USER_ID }}"
-  when: RO_GROUP_ID
+  when: ro_group_search.json
 
 - name: Remove User to rw group
   uri:
-    url: "{{ KC_API_URI }}/auth/admin/realms/{{ KC_REALM }}/users/{{ USER_ID }}/groups/{{ RW_GROUP_ID }}"
+    url: "{{ KC_API_URI }}/auth/admin/realms/{{ KC_REALM }}/users/{{ USER_ID }}/groups/{{ rw_group_search.json[0].id }}"
     method: DELETE
     headers:
       Content-Type: application/json
@@ -65,7 +57,7 @@
     body_format: json
     status_code: 204
     body:
-      groupId: "{{ RW_GROUP_ID }}"
+      groupId: "{{ rw_group_search.json[0].id }}"
       realm: "{{ KC_REALM }}"
       userId: "{{ USER_ID }}"
-  when: RW_GROUP_ID
+  when: rw_group_search.json

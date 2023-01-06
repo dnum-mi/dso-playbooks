@@ -6,3 +6,4 @@
     gitlab_user: "{{GITLAB_USERNAME}}"
     access_level: "{{LEVEL}}"
     state: absent
+  failed_when: false
