@@ -1,0 +1,7 @@
+---
+# Group
+ORGANIZATION_NAME: grp-test
+PROJECT_NAME: grp-test
+VAULT_PROJECT_PATH: forge-dso/data/forge-mi/projects
+VAULT_PATH: "{{VAULT_PROJECT_PATH}}/{{ORGANIZATION_NAME}}/{{PROJECT_NAME}}"
+TOKEN_NAME: "{{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}-clone"
