@@ -1,10 +1,10 @@
-- name: Create argo default project
+- name: Delete argo default project
   kubernetes.core.k8s:
     state: absent
     template: ./templates/argo_project.yml.j2
   with_items: "{{ ENV_LIST }}"
 
-- name: Create argo addtional project
+- name: Delete argo addtional project
   kubernetes.core.k8s:
     state: absent
     template: ./templates/argo_project_addtional.yml.j2

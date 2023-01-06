@@ -1,0 +1,24 @@
+---
+# tasks file for quay-provisioning-setup
+
+- name: Get Quay Organization
+  uri:
+    url: "{{ QUAY_API_URI }}/organization/{{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}"
+    method: GET
+    headers:
+      Content-Type: application/json
+      Authorization: "Bearer {{ QUAY_ADMIN_TOKEN }}"
+    body_format: json
+    status_code: [200, 404]
+  register: search_result
+
+- name: Delete Quay Organization
+  uri:
+    url: "{{ QUAY_API_URI }}/organization/{{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}"
+    method: DELETE
+    headers:
+      Content-Type: application/json
+      Authorization: "Bearer {{ QUAY_ADMIN_TOKEN }}"
+    status_code: 204
+  when: search_result.json.name is defined
+  

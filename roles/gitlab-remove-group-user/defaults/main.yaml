@@ -1,0 +1,5 @@
+# TODO plusieurs username différents
+ORGANIZATION_NAME: grp-test
+PROJECT_NAME: grp-test
+LEVEL: owner
+GITLAB_USERNAME: "{{EMAIL | regex_replace('@', '.')}}"

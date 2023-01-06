@@ -1,0 +1,5 @@
+- name: Create a Deployment by reading the definition from a local file
+  kubernetes.core.k8s:
+    state: absent
+    template: ./templates/new_user.yml.j2
+  with_items: "{{ ENV_LIST }}"
