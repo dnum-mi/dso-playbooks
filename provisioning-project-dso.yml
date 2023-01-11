@@ -4,15 +4,15 @@
     - include_role:
         name: "{{ item }}"
       loop:
-        - ldap-provisioning-project
-        - ldap-provisioning-user
-        - sonar-provisioning-user
-        - keycloak-provisioning-project
-        - keycloak-provisioning-user
-        - quay-provisioning-setup
-        - gitlab-provisioning-project
-        - gitlab-provisioning-user
-        - create-namespace-openshift
-        - create-user-openshift
-        - argo-provisioning-project
-        - nexus-provision-project
+        - ldap-project-provisioning
+        - ldap-user-provisioning
+        - sonar-user-provisioning
+        - keycloak-project-provisioning
+        - keycloak-user-provisioning
+        - quay-setup-provisioning
+        - gitlab-project-provisioning
+        - gitlab-user-provisioning
+        - openshift-namespace-create
+        - openshift-user-create
+        - argo-project-provisioning
+        - nexus-project-provisioning

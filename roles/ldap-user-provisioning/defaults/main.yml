@@ -1,0 +1,5 @@
+---
+# defaults file for ldap-user-provisioning
+ORGANIZATION_NAME: grp-test
+PROJECT_NAME: grp-test
+FINAL_NAME: "{{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}"

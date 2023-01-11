@@ -1,8 +1,0 @@
----
-# defaults file for keycloak-provisioning-project
-ORGANIZATION_NAME: grp-test
-PROJECT_NAME: grp-test
-FINAL_NAME: "{{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}"
-RW_GROUP: "{{ FINAL_NAME }}-RW"
-RO_GROUP: "{{ FINAL_NAME }}-RO"
-KC_REALM: dso
