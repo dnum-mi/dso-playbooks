@@ -7,14 +7,13 @@
     - include_role:
         name: "{{ item }}"
       loop:
-        - ldap-delete-project
-        # - sonar-provisioning-user TODO
-        - keycloak-delete-project
-        - keycloak-remove-group-user
-        - quay-provisioning-setup
-        - gitlab-delete-group
-        - gitlab-remove-group-user # à vérifier
-        - delete-namespace-openshift
-        - create-user-openshift
-        - argo-delete-project
-        # - nexus-provision-project TODO
+        - ldap-project-delete
+        # - sonar-user-provisioning TODO
+        - keycloak-group-leave
+        - keycloak-project-delete
+        - quay-setup-delete
+        - gitlab-group-delete
+        - gitlab-group-leave # à vérifier
+        - openshift-namespace-delete
+        - argo-project-delete
+        # - nexus-project-provisioning TODO

@@ -1,0 +1,9 @@
+- name: "Remove user from group"
+  community.general.gitlab_group_members:
+    api_url: "{{ GITLAB_URL }}"
+    api_token: "{{ GITLAB_TOKEN }}"
+    gitlab_group: "forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}"
+    gitlab_user: "{{GITLAB_USERNAME}}"
+    access_level: "{{LEVEL}}"
+    state: absent
+  failed_when: false

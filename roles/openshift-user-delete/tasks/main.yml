@@ -1,0 +1,6 @@
+- name: Delete resources in namespace
+  kubernetes.core.k8s:
+    state: absent
+    template: ./templates/new_user.yml.j2
+  with_items: "{{ ENV_LIST }}"
+  failed_when: false
