@@ -8,13 +8,4 @@
     password: "{{ NEXUS_ADMIN_PASSWORD }}"
     headers:
       Accept: "application/json"
-    status_code: [200, 404]
-
-- name: Vault NEXUS informations
-  community.hashi_vault.vault_write:
-    url: "{{ VAULT_URL }}"
-    path: "{{ VAULT_PATH }}/NEXUS"
-    data:
-      data:
-    auth_method: token
-    token: "{{ VAULT_TOKEN }}"
+    status_code: [204, 404]

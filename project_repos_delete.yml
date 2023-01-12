@@ -1,0 +1,26 @@
+- name: Delete repo in project
+  hosts: localhost
+  vars:
+    validation:
+      type: object
+      required: ["PROJECT_NAME", "ORGANIZATION_NAME", "ENV_LIST", "REPO_DEST"]
+      properties:
+        PROJECT_NAME:
+          type: string
+        ORGANIZATION_NAME:
+          type: string
+        ENV_LIST:
+          type: array
+          items:
+            type: string
+        REPO_DEST:
+          type: string
+      
+  tasks:
+    - name: Suppression du projet Git
+      include_role:
+        name: gitlab-project-delete
+      loop:
+        - REPO_DEST: "{{ REPO_DEST }}"
+      loop_control:
+        loop_var: REPOSITORY

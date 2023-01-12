@@ -11,7 +11,6 @@
       loop:
         - ldap-project-delete
         - sonar-user-delete
-        - keycloak-group-leave
         - keycloak-project-delete
         - quay-setup-delete
         - gitlab-group-delete
