@@ -101,7 +101,7 @@
     headers:
       Authorization: "Bearer {{ QUAY_ADMIN_TOKEN }}"
   register: result_get
-  when: search_result.json.name is defined and search_result.json.name == FINAL_NAME and not result_create.skipped
+  when: search_result.json.name is defined and search_result.json.name == FINAL_NAME
 
 - name: Add Robot to team owners
   uri:
@@ -110,7 +110,7 @@
     status_code: 200
     headers:
       Authorization: "Bearer {{ QUAY_ADMIN_TOKEN }}"
-  when: search_result.json.name is not defined and not result_create.skipped
+  when: search_result.json.name is not defined
 
 - name: "Set result update"
   set_fact:
@@ -120,14 +120,13 @@
 - name: "Set result create"
   set_fact:
     result: "{{ result_create.json.token }}"
-  when: search_result.json.name is not defined  and not result_create.skipped
+  when: search_result.json.name is not defined
 
 - name: "Export result"
   set_fact:
     QUAY_ROBOT_USERNAME: "{{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}+{{ QUAY_ROBOT_USERNAME }}"
     QUAY_ROBOT_TOKEN: "{{result}}"
     QUAY_DOCKER_SECRET: "{{ (QUAY_ROBOT_USERNAME + ':' + result) | b64encode }}"
-  when: not result_create.skipped
 
 - name: Vault QUAY informations
   community.hashi_vault.vault_write:
@@ -139,4 +138,3 @@
         QUAY_ROBOT_TOKEN: "{{ QUAY_ROBOT_TOKEN }}"
     auth_method: token
     token: "{{ VAULT_TOKEN }}"
-  when: not result_create.skipped
