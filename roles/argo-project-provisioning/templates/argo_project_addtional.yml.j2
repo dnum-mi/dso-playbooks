@@ -7,7 +7,7 @@ metadata:
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
-  url: "{{ GITLAB_URL }}/forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}/{{ item[1] }}.git"
+  url: "{{ GITLAB_URL | trim('/') }}/forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}/{{ item[1] }}.git"
   name: private-repo
   type: git
   password: "{{ GITLAB_TOKEN }}"
@@ -43,7 +43,7 @@ spec:
     policies:
     - p, proj:{{ NAMESPACE_NAME }}-{{ item[1] }}-{{ item[0] }}-project:{{ NAMESPACE_NAME }}-{{ item[1] }}-{{ item[0] }}-RW, applications, *, {{ NAMESPACE_NAME }}-{{ item[1] }}-{{ item[0] }}-project/*, allow
   sourceRepos:
-  - "{{ GITLAB_URL }}/forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}/{{ item[1] }}.git"
+  - "{{ GITLAB_URL | trim('/') }}/forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}/{{ item[1] }}.git"
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -57,7 +57,7 @@ spec:
   project: "{{ NAMESPACE_NAME }}-{{ item[1] }}-{{ item[0] }}-project"
   source:
     path: base
-    repoURL: "{{ GITLAB_URL }}/forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}/{{ item[1] }}.git"
+    repoURL: "{{ GITLAB_URL | trim('/') }}/forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}/{{ item[1] }}.git"
     targetRevision: HEAD
   syncPolicy:
     automated:
