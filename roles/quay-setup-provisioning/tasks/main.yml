@@ -23,7 +23,7 @@
     status_code: 201
     body:
       name: "{{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}"
-    register: create_quay_org
+  register: create_quay_org
   when: get_quay_org.json.name is not defined
 
 - name: Create Quay RO team
