@@ -72,7 +72,7 @@
   uri:
     url: "{{ QUAY_API_URI }}/organization/{{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}/robots/{{ QUAY_ROBOT_USERNAME }}"
     method: GET
-    status_code: 200
+    status_code: [200, 400]
     headers:
       Authorization: "Bearer {{ QUAY_ADMIN_TOKEN }}"
   register: get_quay_robot
