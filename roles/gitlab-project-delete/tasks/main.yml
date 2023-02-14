@@ -31,7 +31,6 @@
   vars:
     ADDITIONAL_ARGO:
       - "{{ REPOSITORY.REPO_DEST }}"
-  when: IS_INFRA is defined and IS_INFRA
 
 - name: Vault Repo informations
   community.hashi_vault.vault_write:

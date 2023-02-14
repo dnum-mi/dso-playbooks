@@ -8,12 +8,12 @@
         name: "{{ item }}"
       loop:
         - ldap-project-delete
-        # - sonar-user-provisioning TODO
+        - sonar-user-delete
         - keycloak-group-leave
         - keycloak-project-delete
         - quay-setup-delete
         - gitlab-group-delete
-        - gitlab-group-leave # à vérifier
+        # - gitlab-group-leave
         - openshift-namespace-delete
         - argo-project-delete
-        # - nexus-project-provisioning TODO
+        - nexus-project-delete

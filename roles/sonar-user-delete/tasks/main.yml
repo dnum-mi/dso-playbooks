@@ -1,0 +1,20 @@
+- name: "Deactivate Sonar User"
+  uri:
+    url: "{{ SONAR_API_URL }}api/users/deactivate"
+    method: POST
+    user: "{{SONAR_API_TOKEN}}"
+    password: ""
+    body_format: form-urlencoded
+    body:
+      login: "{{ SONAR_USERNAME }}"
+    force_basic_auth: yes
+    status_code: [200, 404]
+
+- name: Vault SONAR informations
+  community.hashi_vault.vault_write:
+    url: "{{ VAULT_URL }}"
+    path: "{{ VAULT_PATH }}/SONAR"
+    data:
+      data:
+    auth_method: token
+    token: "{{ VAULT_TOKEN }}"
