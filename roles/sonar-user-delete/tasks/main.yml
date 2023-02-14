@@ -9,21 +9,6 @@
       login: "{{ SONAR_USERNAME }}"
     force_basic_auth: yes
     status_code: [200, 404]
-  when: search_result.json.paging.total != 0
-
-- name: "Revoke Sonar Token"
-  uri:
-    url: "{{ SONAR_API_URL }}api/user_tokens/revoke"
-    method: POST
-    user: "{{SONAR_API_TOKEN}}"
-    password: ""
-    body_format: form-urlencoded
-    body:
-      login: "{{ SONAR_USERNAME }}"
-      name: "Sonar Token for {{PROJECT_NAME}}"
-    force_basic_auth: yes
-    status_code: 204
-  when: search_result.json.paging.total > 0
 
 - name: Vault SONAR informations
   community.hashi_vault.vault_write:
