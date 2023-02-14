@@ -1,0 +1,20 @@
+- name: delete role
+  uri:
+    url: "{{NEXUS_URL}}/security/roles/{{ORGANIZATION_NAME}}-{{ PROJECT_NAME }}-ID"
+    method: POST
+    validate_certs: False
+    force_basic_auth: true
+    user: "{{ NEXUS_ADMIN }}"
+    password: "{{ NEXUS_ADMIN_PASSWORD }}"
+    headers:
+      Accept: "application/json"
+    status_code: [200, 404]
+
+- name: Vault NEXUS informations
+  community.hashi_vault.vault_write:
+    url: "{{ VAULT_URL }}"
+    path: "{{ VAULT_PATH }}/NEXUS"
+    data:
+      data:
+    auth_method: token
+    token: "{{ VAULT_TOKEN }}"
