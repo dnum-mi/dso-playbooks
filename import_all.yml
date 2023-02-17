@@ -1,0 +1,12 @@
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - ansible.builtin.set_fact:
+        NAMESPACE: "{{ lookup('ansible.builtin.env', 'INVENTORY_NAMESPACE') }}"
+        NAME: "{{ lookup('ansible.builtin.env', 'INVENTORY_NAME') }}"
+        KEY: "{{ lookup('ansible.builtin.env', 'INVENTORY_KEY') }}"
+
+    - name: Copy inventory vars
+      ansible.builtin.copy:
+        dest: "{{ lookup('ansible.builtin.env', 'PLAYBOOK_DIR', default='nobody') }}/inventory/group_vars/local"
+        content: "{{ lookup('kubernetes.core.k8s', kind='Secret', namespace=NAMESPACE, resource_name=NAME) | json_query('data.'+KEY) | b64decode }}"

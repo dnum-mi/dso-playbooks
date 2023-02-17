@@ -5,7 +5,7 @@
   tasks:
     - name: Disclaimer
       ansible.builtin.debug:
-        msg: "Attention ! La suppression d'un projet ne supprimes pas les applications Argo, utilisez d'abord le playbook 'delete_git_project.yml' pour les effacer"
+        msg: "Attention ! La suppression d'un projet ne supprime pas les applications Argo, utilisez d'abord le playbook 'delete_git_project.yml' pour les effacer"
     - include_role:
         name: "{{ item }}"
       loop:
