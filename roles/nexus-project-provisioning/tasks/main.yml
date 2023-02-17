@@ -38,12 +38,12 @@
     status_code: 201
     body_format: json
     body:
-      name: "{{ORGANIZATION_NAME}}-{{ PROJECT_NAME }}-repository-{{item}}"
+      name: "{{ORGANIZATION_NAME}}-{{ PROJECT_NAME }}-repository-{{item.name}}"
       online: true
       storage:
         blobStoreName: default
         strictContentTypeValidation: true
-        writePolicy: allow_once
+        writePolicy: "{{item.mode}}"
       cleanup:
         policyNames:
           - string
@@ -54,8 +54,8 @@
         layoutPolicy: "STRICT"
         contentDisposition: "ATTACHMENT"
   with_items:
-    - "snapshot"
-    - "release"
+    - {name: "snapshot", mode: "allow"}
+    - {name: "release", mode: "allow_once"}
   when: "search_result.json|length == 0"
 
 - name: create maven group
