@@ -1,4 +1,4 @@
-- name: Dele git repository
+- name: Delete git repository
   hosts: localhost
   tasks:
     - name: Suppression du projet Git

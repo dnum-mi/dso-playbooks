@@ -1,9 +1,3 @@
-- name: Create argo default project
-  kubernetes.core.k8s:
-    state: present
-    template: ./templates/argo_project.yml.j2
-  with_items: "{{ ENV_LIST }}"
-
 - name: Create argo addtional project
   kubernetes.core.k8s:
     state: present

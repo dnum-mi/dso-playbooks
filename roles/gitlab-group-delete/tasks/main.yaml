@@ -1,3 +1,11 @@
+- name: "Delete GitLab Project Argo in the group"
+  community.general.gitlab_project:
+    api_url: "{{ GITLAB_URL }}"
+    api_token: "{{ GITLAB_TOKEN }}"
+    name: "{{ PROJECT_NAME }}-argo"
+    group: "forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}"
+    state: absent
+
 - name: "Delete GitLab Group"
   community.general.gitlab_group:
     api_url: "{{ GITLAB_URL }}"

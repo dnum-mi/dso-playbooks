@@ -20,32 +20,6 @@
     project_creation_level: "developer"
     state: present
 
-- name: "Create GitLab Argo in the group"
-  community.general.gitlab_project:
-    api_url: "{{ GITLAB_URL }}"
-    api_token: "{{ GITLAB_TOKEN }}"
-    name: "{{ PROJECT_NAME }}-argo"
-    group: "forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}"
-    state: present
-
-- name: "Create GitLab Project in the group"
-  community.general.gitlab_project:
-    api_url: "{{ GITLAB_URL }}"
-    api_token: "{{ GITLAB_TOKEN }}"
-    name: "{{ item }}"
-    group: "forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}"
-    state: present
-  with_items: "{{REPO_NAME}}"
-
-- name: "Create GitLab Additional Argo in the group"
-  community.general.gitlab_project:
-    api_url: "{{ GITLAB_URL }}"
-    api_token: "{{ GITLAB_TOKEN }}"
-    name: "{{ PROJECT_NAME }}-{{ item }}"
-    group: "forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}"
-    state: present
-  with_items: "{{ADDITIONAL_ARGO}}"
-
 - name: "Export result"
   set_fact:
     ORGANIZATION_NAME: "{{ ORGANIZATION_NAME }}"

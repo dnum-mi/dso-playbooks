@@ -1,0 +1,58 @@
+# Variables nécessaires :
+# - PROJECT_NAME
+# - ORGANIZATION_NAME
+# - EMAIL
+- name: Create project
+  hosts: localhost
+  vars:
+    validation:
+      required: ["PROJECT_NAME", "ORGANIZATION_NAME","EMAIL"]
+      type: object
+      properties:
+        PROJECT_NAME:
+          type: string
+        ORGANIZATION_NAME:
+          type: string
+        EMAIL:
+          type: string
+        ENV_LIST:
+          type: array
+          items:
+            type: string
+    FINAL_NAME: "{{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}"
+  tasks:
+    # création du groupe et ajout de l'utilisateur ldap
+    - include_role:
+        name: ldap-user-provisioning
+    - include_role:
+        name: ldap-project-provisioning
+    - include_role:
+        name: ldap-group-join
+      vars:
+        GROUP: "{{ item }}"
+      with_items:
+        - "{{ FINAL_NAME }}"
+        - "{{ FINAL_NAME }}-adm"
+
+    - include_role:
+        name: sonar-project-provisioning
+
+    - include_role:
+        name:  keycloak-project-provisioning
+    - include_role:
+        name:  keycloak-user-provisioning
+
+    - include_role:
+        name: quay-setup-provisioning
+    - include_role:
+        name: gitlab-project-provisioning
+    - include_role:
+        name: gitlab-user-provisioning
+    - include_role:
+        name: openshift-namespace-create
+    - include_role:
+        name: openshift-user-create
+    - include_role:
+        name: argo-project-provisioning
+    - include_role:
+        name: nexus-project-provisioning
