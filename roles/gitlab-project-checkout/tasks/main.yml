@@ -4,6 +4,7 @@
     api_token: "{{ GITLAB_TOKEN }}"
     name: "{{ REPOSITORY.REPO_DEST }}"
     group: "forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}"
+    ci_config_path: .gitlab-ci-dso.yml
     state: present
 
 - name: "Create GitLab Project Mirror in the group"
