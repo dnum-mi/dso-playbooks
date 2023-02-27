@@ -114,6 +114,9 @@
   set_fact:
     QUAY_ROBOT_USERNAME: "{{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}+{{ QUAY_ROBOT_USERNAME }}"
     QUAY_ROBOT_TOKEN: "{{robot_token}}"
+  
+- name: Export new Quay robot username
+  set_fact:
     QUAY_DOCKER_SECRET: "{{ (QUAY_ROBOT_USERNAME + ':' + robot_token) | b64encode }}"
 
 - name: Vault QUAY informations
