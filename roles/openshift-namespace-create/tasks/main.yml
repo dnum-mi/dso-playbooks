@@ -1,8 +1,12 @@
 - name: Create a k8s namespace
   kubernetes.core.k8s:
-    name: "{{ NAMESPACE_NAME }}-{{ item }}"
-    api_version: v1
-    kind: Namespace
+    definition:
+      metadata:
+        name: "{{ NAMESPACE_NAME }}-{{ item }}"
+        labels:
+          argocd.argoproj.io/managed-by: gitops-system 
+      apiVersion: v1
+      kind: Namespace
     state: present
   with_items: "{{ ENV_LIST }}"
 
