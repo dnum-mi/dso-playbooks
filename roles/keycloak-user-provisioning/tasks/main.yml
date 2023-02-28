@@ -16,10 +16,14 @@
       realm: master
       scope: openid
   register: token
+  tags:
+  - kcgroups
 
 - name: "Set token"
   set_fact:
     KC_TOKEN: "{{token.json.access_token}}"
+  tags:
+  - kcgroups
 
 - name: Search User in KC
   uri:
@@ -30,6 +34,8 @@
       Authorization: "Bearer {{ KC_TOKEN }}"
     status_code: 200
   register: user_search
+  tags:
+  - kcgroups
 
 - name: Create User in KC
   uri:
@@ -46,6 +52,10 @@
       enabled: true
       username: "{{ EMAIL }}"
   when: user_search.json|length == 0
+  tags:
+  - kcgroups
 
 - include_tasks: groups.yml
   loop: "{{ ENV_LIST }}"
+  tags:
+  - kcgroups

@@ -12,6 +12,8 @@
     auth_username: "{{ KC_ADMIN }}"
     auth_password: "{{ KC_PASSWORD }}"
   with_items: "{{ ENV_LIST }}"
+  tags:
+  - kcgroups
 
 - name: Create a project read group
   community.general.keycloak_group:
@@ -24,3 +26,5 @@
     auth_username: "{{ KC_ADMIN }}"
     auth_password: "{{ KC_PASSWORD }}"
   with_items: "{{ ENV_LIST }}"
+  tags:
+  - kcgroups

@@ -7,6 +7,8 @@
       Authorization: "Bearer {{ KC_TOKEN }}"
     status_code: 200
   register: user_search
+  tags:
+  - kcgroups
 
 - name: Search RO group in KC
   uri:
@@ -17,6 +19,8 @@
       Authorization: "Bearer {{ KC_TOKEN }}"
     status_code: 200
   register: ro_group_search
+  tags:
+  - kcgroups
 
 - name: Search RW group in KC
   uri:
@@ -27,12 +31,16 @@
       Authorization: "Bearer {{ KC_TOKEN }}"
     status_code: 200
   register: rw_group_search
+  tags:
+  - kcgroups
 
 - name: "Set id"
   set_fact:
     USER_ID: "{{ user_search.json[0].id }}"
     RO_GROUP_ID: "{{ ro_group_search.json[0].id }}"
     RW_GROUP_ID: "{{ rw_group_search.json[0].id }}"
+  tags:
+  - kcgroups
 
 - name: Add User to ro group
   uri:
@@ -47,6 +55,8 @@
       groupId: "{{ RO_GROUP_ID }}"
       realm: "{{KC_REALM}}"
       userId: "{{ USER_ID }}"
+  tags:
+  - kcgroups
 
 - name: Add User to rw group
   uri:
@@ -61,3 +71,5 @@
       groupId: "{{ RW_GROUP_ID }}"
       realm: "{{KC_REALM}}"
       userId: "{{ USER_ID }}"
+  tags:
+  - kcgroups
