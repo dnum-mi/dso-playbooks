@@ -1,6 +1,20 @@
 - name: Provisionning DSO
   hosts: localhost
   vars:
+    validation:
+      required: ["PROJECT_NAME", "ORGANIZATION_NAME","EMAIL"]
+      type: object
+      properties:
+        PROJECT_NAME:
+          type: string
+        ORGANIZATION_NAME:
+          type: string
+        EMAIL:
+          type: string
+        ENV_LIST:
+          type: array
+          items:
+            type: string
     FINAL_NAME: "{{ ORGANIZATION_NAME }}-{{ PROJECT_NAME }}"
   tasks:
     - name: Disclaimer
