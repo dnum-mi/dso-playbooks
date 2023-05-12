@@ -4,6 +4,7 @@
     api_token: "{{ GITLAB_TOKEN }}"
     name: "{{ REPOSITORY.REPO_DEST }}"
     group: "forge-mi/projects/{{ ORGANIZATION_NAME }}/{{ PROJECT_NAME }}"
+    ci_config_path: .gitlab-ci-dso.yml
     state: present
 
 - name: "Create GitLab Project Mirror in the group"
@@ -33,8 +34,8 @@
 - name: "Push mirror ci"
   ansible.builtin.shell: |
     cd /tmp/{{ REPOSITORY.REPO_DEST }}-mirror
-    git config user.email "{{EMAIL}}"
-    git config user.name "{{EMAIL}}"
+    git config user.email "{{EMAILS[0]}}"
+    git config user.name "{{EMAILS[0]}}"
     git add -A
     git commit -am "mirror"
     git push

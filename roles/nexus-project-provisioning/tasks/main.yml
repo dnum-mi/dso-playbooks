@@ -35,7 +35,7 @@
     password: "{{ NEXUS_ADMIN_PASSWORD }}"
     headers:
       Accept: "application/json"
-    status_code: 201
+    status_code: [201, 400]
     body_format: json
     body:
       name: "{{ORGANIZATION_NAME}}-{{ PROJECT_NAME }}-repository-{{item.name}}"
@@ -68,7 +68,7 @@
     password: "{{ NEXUS_ADMIN_PASSWORD  }}"
     headers:
       Accept: "application/json"
-    status_code: 201
+    status_code: [201, 400]
     body_format: json
     body:
       name: "{{ORGANIZATION_NAME}}-{{ PROJECT_NAME }}-repository-group"
@@ -93,7 +93,7 @@
     password: "{{ NEXUS_ADMIN_PASSWORD }}"
     headers:
       Accept: "application/json"
-    status_code: 201
+    status_code: [201, 400]
     body_format: json
     body:
       name: "{{ORGANIZATION_NAME}}-{{ PROJECT_NAME }}-privilege-{{item}}"
@@ -118,7 +118,7 @@
     password: "{{ NEXUS_ADMIN_PASSWORD }}"
     headers:
       Accept: "application/json"
-    status_code: 200
+    status_code: [200, 400]
     body_format: json
     body:
       id: "{{ORGANIZATION_NAME}}-{{ PROJECT_NAME }}-ID"
@@ -140,7 +140,7 @@
     password: "{{ NEXUS_ADMIN_PASSWORD }}"
     headers:
       Accept: "application/json"
-    status_code: 200
+    status_code: [200, 400]
     body_format: json
     body:
       userId: "{{ORGANIZATION_NAME}}-{{ PROJECT_NAME }}"

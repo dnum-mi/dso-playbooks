@@ -1,0 +1,7 @@
+- name: leave group {{ GROUP }}
+  ldap_attrs:
+    dn: "cn={{ GROUP }},ou=users,dc=example,dc=org"
+    attributes:
+      member: "cn={{ EMAIL }},ou=users,dc=example,dc=org"     
+    state: absent
+  args: "{{ LDAP_AUTH }}"

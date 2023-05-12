@@ -19,12 +19,9 @@ metadata:
   name: "{{ NAMESPACE_NAME }}-{{ item[1] }}-{{ item[0] }}-project"
   namespace: gitops-system
 spec:
-  clusterResourceWhitelist:
-  - group: '*'
-    kind: '*'
   destinations:
   - name: '*'
-    namespace: "{{ NAMESPACE_NAME }}-{{ item[1] }}-{{ item[0] }}"
+    namespace: "{{ NAMESPACE_NAME }}-{{ item[0] }}"
     server: '*'
   namespaceResourceWhitelist:
   - group: '*'
@@ -52,7 +49,7 @@ metadata:
   namespace: gitops-system
 spec:
   destination:
-    namespace: "{{ NAMESPACE_NAME }}-{{ item[1] }}-{{ item[0] }}"
+    namespace: "{{ NAMESPACE_NAME }}-{{ item[0] }}"
     server: https://kubernetes.default.svc
   project: "{{ NAMESPACE_NAME }}-{{ item[1] }}-{{ item[0] }}-project"
   source:
@@ -64,5 +61,4 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true
       - RespectIgnoreDifferences=true
